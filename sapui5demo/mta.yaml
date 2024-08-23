@@ -1,0 +1,69 @@
+_schema-version: "3.2"
+ID: sapui5demo
+description: Fiori elements app
+version: 0.0.1
+modules:
+- name: sapui5demo-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: sapui5demo-destination-service
+    parameters:
+      content-target: true
+  - name: sapui5demo-repo-host
+    parameters:
+      service-key:
+        name: sapui5demo-repo-host-key
+  - name: sapui5demo-uaa
+    parameters:
+      service-key:
+        name: sapui5demo-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: sapui5demo_repo_host
+          ServiceInstanceName: sapui5demo-html5-srv
+          ServiceKeyName: sapui5demo-repo-host-key
+          sap.cloud.service: sapui5demo
+        - Authentication: OAuth2UserTokenExchange
+          Name: sapui5demo_uaa
+          ServiceInstanceName: sapui5demo-xsuaa-srv
+          ServiceKeyName: sapui5demo-uaa-key
+          sap.cloud.service: sapui5demo
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+resources:
+- name: sapui5demo-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json  
+    service: xsuaa
+    service-name: sapui5demo-xsuaa-srv
+    service-plan: application
+- name: sapui5demo-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+      init_data:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+          - Name: ui5
+            Type: HTTP
+            URL: https://ui5.sap.com
+            ProxyType: Internet
+            Authentication: NoAuthentication
+    service: destination
+    service-name: sapui5demo-destination-service
+    service-plan: lite
+- name: sapui5demo-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: sapui5demo-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
