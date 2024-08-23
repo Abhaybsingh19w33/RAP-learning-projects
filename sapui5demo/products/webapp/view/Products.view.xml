@@ -1,8 +1,11 @@
-<mvc:View controllerName="ns.products.controller.Products"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="ns.products.controller.Products" displayBlock="true">
     <Page id="page" title="{i18n>title}">
-        some content
-        <content />
+        <content>
+            <List noDataText="Drop list items here" items="{/ProductSet}" id="list0">
+                <items>
+                    <StandardListItem type="Navigation" title="{Name}" description="Description text" icon="sap-icon://picture" id="item0"/>
+                </items>
+            </List>
+        </content>
     </Page>
 </mvc:View>
