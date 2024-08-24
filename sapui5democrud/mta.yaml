@@ -1,0 +1,69 @@
+_schema-version: "3.2"
+ID: sapui5democrud
+description: Fiori elements app
+version: 0.0.1
+modules:
+- name: sapui5democrud-dest-content
+  type: com.sap.application.content
+  requires:
+  - name: sapui5democrud-destination-service
+    parameters:
+      content-target: true
+  - name: sapui5democrud-repo-host
+    parameters:
+      service-key:
+        name: sapui5democrud-repo-host-key
+  - name: sapui5democrud-uaa
+    parameters:
+      service-key:
+        name: sapui5democrud-uaa-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: sapui5democrud_repo_host
+          ServiceInstanceName: sapui5democrud-html5-srv
+          ServiceKeyName: sapui5democrud-repo-host-key
+          sap.cloud.service: sapui5democrud
+        - Authentication: OAuth2UserTokenExchange
+          Name: sapui5democrud_uaa
+          ServiceInstanceName: sapui5democrud-xsuaa-srv
+          ServiceKeyName: sapui5democrud-uaa-key
+          sap.cloud.service: sapui5democrud
+        existing_destinations_policy: update
+  build-parameters:
+    no-source: true
+resources:
+- name: sapui5democrud-uaa
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json  
+    service: xsuaa
+    service-name: sapui5democrud-xsuaa-srv
+    service-plan: application
+- name: sapui5democrud-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      version: 1.0.0
+      init_data:
+        instance:
+          existing_destinations_policy: update
+          destinations:
+          - Name: ui5
+            Type: HTTP
+            URL: https://ui5.sap.com
+            ProxyType: Internet
+            Authentication: NoAuthentication
+    service: destination
+    service-name: sapui5democrud-destination-service
+    service-plan: lite
+- name: sapui5democrud-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: sapui5democrud-html5-srv
+    service-plan: app-host
+parameters:
+  deploy_mode: html5-repo
