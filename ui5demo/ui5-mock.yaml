@@ -16,7 +16,7 @@ server:
             - /test-resources
           url: https://ui5.sap.com
         backend:
-          - path: /V3
+          - path: /V2
             url: https://services.odata.org
             destination: northwind
     - name: fiori-tools-appreload
@@ -30,7 +30,7 @@ server:
       configuration:
         mountPath: /
         services:
-          - urlPath: /V3/(S(lh3xqgck15u1ra0e4mhjabsu))/OData/OData.svc
+          - urlPath: /V2/(S(lh3xqgck15u1ra0e4mhjabsu))/OData/OData.svc
             metadataPath: ./webapp/localService/metadata.xml
             mockdataPath: ./webapp/localService/data
             generateMockData: true

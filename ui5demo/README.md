@@ -7,7 +7,7 @@
 |**Generation Platform**<br>SAP Business Application Studio|
 |**Template Used**<br>simple|
 |**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>https://services.odata.org/V3/(S(lh3xqgck15u1ra0e4mhjabsu))/OData/OData.svc/|
+|**Service URL**<br>https://services.odata.org/V2/(S(lh3xqgck15u1ra0e4mhjabsu))/OData/OData.svc/|
 |**Module Name**<br>ui5demo|
 |**Application Title**<br>UI5 Demo|
 |**Namespace**<br>nw|

@@ -3,8 +3,8 @@
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "^/V3/(.*)$",
-      "target": "/V3/$1",
+      "source": "^/V2/(.*)$",
+      "target": "/V2/$1",
       "destination": "northwind",
       "authenticationType": "none",
       "csrfProtection": false
