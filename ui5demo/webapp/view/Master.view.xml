@@ -1,7 +1,29 @@
-<mvc:View controllerName="nw.ui5demo.controller.Master"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="nw.ui5demo.controller.Master" displayBlock="true">
     <Page id="page" title="{i18n>title}">
-        <content />
+        <content>
+            <VBox width="100%" direction="Column" id="vbox0">
+                <Input placeholder="Category" id="idinput"/>
+                <Input placeholder="Name" id="idinput2"/>
+                <HBox width="100%" id="hbox0">
+                    <Button xmlns="sap.m" text="Create" id="button0" press="createData"/>
+                    <Button xmlns="sap.m" text="Update" id="button1" press="updateData"/>
+                    <Button xmlns="sap.m" text="Delete" id="button2" press="deleteData"/>            
+                </HBox>
+                <Button id="helloDialogButton" text="open Dialog" press=".onOpenDialog" class="sapUiSmallMarginEnd" />
+            </VBox>
+            
+            <Text xmlns="sap.m" text="nwModel" id="text0"/>
+             <List noDataText="Drop list items here" id="list1" items="{nwModel/Categories}" mode="SingleSelectLeft">
+                <items>
+                    <StandardListItem id="_IDGenStandardListItem2" type="Navigation" title="{nwModel>ID}" description="{nwModel>Name}"/>
+                </items>
+            </List>
+            <Text xmlns="sap.m" text="DefaultModel" id="text1"/>
+             <List noDataText="Drop list items here" id="list0" items="{/Categories}" mode="SingleSelectLeft">
+                <items>
+                    <StandardListItem id="_IDGenStandardListItem1" type="Navigation" title="{ID}" description="{Name}"/>
+                </items>
+            </List>
+        </content>
     </Page>
 </mvc:View>
